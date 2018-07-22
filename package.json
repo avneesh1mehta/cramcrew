@@ -8,7 +8,7 @@
     "webpack-dev-server": "NODE_ENV=debug webpack-dev-server --port 2992 --hot --inline",
     "flask-server": "FLASK_APP=$PWD/autoapp.py FLASK_DEBUG=1 flask run",
     "lint": "eslint \"assets/js/*.js\"",
-    "postinstall": "npm run build"
+    "postinstall": "npm run-script build"
   },
   "repository": {
     "type": "git",
