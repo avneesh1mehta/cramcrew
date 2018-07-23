@@ -2,33 +2,28 @@
 """User models."""
 import datetime as dt
 
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 
 from cramcrew.database import Column, Model, SurrogatePK, db, reference_col, relationship
 from cramcrew.extensions import bcrypt
 
 
-class Role(SurrogatePK, Model):
-    """A role for a user."""
+class Preference(SurrogatePK, Model):
+    """A class preference for a user."""
 
-    __tablename__ = 'roles'
-    name = Column(db.String(80), unique=True, nullable=False)
-    user_id = reference_col('users', nullable=True)
-    user = relationship('User', backref='roles')
-
-    def __init__(self, name, **kwargs):
-        """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+    __tablename__ = 'preferences'
+    class_field = Column(db.String(80), unique=False, nullable=False)
+    user_id = reference_col('user', nullable=True)
 
     def __repr__(self):
         """Represent instance as a unique string."""
-        return '<Role({name})>'.format(name=self.name)
+        return '<Preference({class_field})>'.format(class_field=self.class_field)
 
 
 class User(UserMixin, SurrogatePK, Model):
     """A user of the app."""
 
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     username = Column(db.String(80), unique=True, nullable=False)
     email = Column(db.String(80), unique=True, nullable=False)
     #: The hashed password
@@ -38,6 +33,7 @@ class User(UserMixin, SurrogatePK, Model):
     last_name = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
+    prefs = relationship('Preference', backref='user')
 
     def __init__(self, username, email, password=None, **kwargs):
         """Create instance."""

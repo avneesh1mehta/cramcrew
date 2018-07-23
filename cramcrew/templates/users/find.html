@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Hello {{ current_user.username }}!</h1>
+    <div class="container-narrow">
+      <h1>Find Crew</h1>
+        <br/>
+        <form id="preferencesForm" class="form form-register" method="POST" action="" role="form">
+               {{ form.csrf_token }}
+                <div class="form-group">
+                    {{form.class_field.labale}}
+                    {{form.class_field(class_="form-control")}}
+                </div>
+                <p><input class="btn btn-default btn-submit" type="submit" value="Submit"></p>
+        </form>
+    </div>
+{% endblock %}

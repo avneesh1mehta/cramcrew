@@ -1,0 +1,11 @@
+
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Users with the matching preferences:</h1>
+    {% if prefs %}
+      {% for pref in prefs %}
+      <h3>User: {{ pref.user.username }}</h3>
+      <h4>Class: {{ pref.class_field }}</h4>
+      {% endfor %}
+    {% endif %}
+{% endblock %}
