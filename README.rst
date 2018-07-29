@@ -7,34 +7,23 @@ The smart way to study.
 
 Quickstart
 ----------
+First, make sure you install pipenv_ via brew or fedora. 
 
-First, set your app's secret key as an environment variable. For example,
-add the following to ``.bashrc`` or ``.bash_profile``.
-
-.. code-block:: bash
-
-    export CRAMCREW_SECRET='something-really-secret'
+.. _pipenv: https://docs.pipenv.org/
 
 Run the following commands to bootstrap your environment ::
 
-    git clone https://github.com/avneesh1mehta/cramcrew
+    git clone https://github.com/avneesh1mehta/cramcrew.git
     cd cramcrew
     pipenv install --dev
     npm install
-    npm start  # run the webpack dev server and flask server using concurrently
+    npm start
 
-You will see a pretty welcome screen.
+Navigate to http://localhost:5000/ to view the app. Type Ctrl-C to stop the server.
 
-In general, before running shell commands, set the ``FLASK_APP`` and
-``FLASK_DEBUG`` environment variables ::
+If that doesn't work, you may need to migrate the db before starting the server ::
 
-    export FLASK_APP=autoapp.py
-    export FLASK_DEBUG=1
-
-Once you have installed your DBMS, run the following to create your app's
-database tables and perform the initial migration ::
-
-    flask db init
+    flask db init # only do if you get an error after running the next two commands first
     flask db migrate
     flask db upgrade
     npm start
@@ -42,16 +31,11 @@ database tables and perform the initial migration ::
 
 Deployment
 ----------
+Commit your changes on a new branch and raise a pull request to be merged with master. After merging with master, a new build will be deployed automatically ::
 
-To deploy::
-
-    export FLASK_DEBUG=0
-    npm run build   # build assets with webpack
-    flask run       # start the flask server
-
-In your production environment, make sure the ``FLASK_DEBUG`` environment
-variable is unset or is set to ``0``, so that ``ProdConfig`` is used.
-
+    git add .
+    git commit -m "message"
+    git push origin dev-branch
 
 Shell
 -----
