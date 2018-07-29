@@ -16,8 +16,17 @@ Run the following commands to bootstrap your environment ::
     git clone https://github.com/avneesh1mehta/cramcrew.git
     cd cramcrew
     pipenv install --dev
+    pipenv shell
     npm install
     npm start
+
+If you are using virtualenv, replace the pipenv steps with ::
+
+    virtualenv cramcrew
+    source cramcrew/bin/activate
+    pip install -r requirements.txt
+
+To exit the virtual environment, type `exit` for pipenv and `deactivate` for virtualenv. 
 
 Navigate to http://localhost:5000/ to view the app. Type Ctrl-C to stop the server.
 
@@ -31,7 +40,7 @@ If that doesn't work, you may need to migrate the db before starting the server 
 
 Deployment
 ----------
-Commit your changes on a new branch and raise a pull request to be merged with master. After merging with master, a new build will be deployed automatically ::
+Commit your changes on a new branch and raise a pull request to be merged with master. After merging with master, I will retrigger a build for the deployed version. ::
 
     git add .
     git commit -m "message"
